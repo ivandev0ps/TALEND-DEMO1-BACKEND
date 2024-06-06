@@ -1,0 +1,382 @@
+package routines;
+
+import java.util.List;
+
+import org.apache.poi.sl.usermodel.VerticalAlignment;
+
+import java.util.Arrays;
+
+import java.io.IOException;
+import com.itextpdf.text.*;
+import com.itextpdf.text.TabStop.Alignment;
+//import com.sun.prism.paint.Color;
+//import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.layout.element.*;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.properties.*;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+//import com.itextpdf.layout.properties.VerticalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.UnitValue;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.borders.Border;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.kernel.geom.PageSize;
+
+public class writePDFroutines {
+	
+	private static String NumFactura = "";
+	private static String FechaFactura = "";
+	private static String NombreReceptor = "";
+	private static String NIF_Receptor = "";
+	private static String DireccionReceptor = "";
+	private static String ImporteTotal = "";
+	private static String ImpTotalIVA = "";
+	private static String TotalBaseImp = "";
+	private static String BaseImponible21 = "";
+	private static String Importe21 = "";
+	private static String BaseImponible10 = "3.750";
+	private static String Importe10 = "375,000";
+	private static String BaseImponible4 = "";
+	private static String Importe4 = "";
+	private static String BaseImponible0 = "";
+	private static String Importe0 = "";
+	private static String FechaVencimiento = "";
+	private static String Metodo_de_pago = "";
+	private static String CodigoPostal = "";
+	private static String Ciudad = "";
+	private static String Provincia = "";
+	private static String Telefono = "";
+
+	private static String mensaje = "";
+	private static Boolean isOk = true;
+	private static String nombreFicheroSalida = "";
+
+    private static String nombEmisor = "Esneja SL";
+    private static String calleEmisor = "Muntaner 87 1º 2ª";
+    private static String direccionEmisor = "08009 Molins de Rei, Barcelona";
+    private static String nifEmisor = "NIF B67876543";
+    private static String IBANEmisor = "IBAN ES20210001544755001";
+    
+    private static String EmisorDatosCompletos = nombEmisor +" - " + calleEmisor + " - " + direccionEmisor + " - " + IBANEmisor ;
+	
+	public static void setInvoiceVariables(String message) {
+     List<String> invoiceData = Arrays.asList(message.split(";"));
+     
+     //Datos receptor
+     NumFactura = invoiceData.get(0);
+     FechaFactura = invoiceData.get(1);
+     NombreReceptor = invoiceData.get(2);
+     NIF_Receptor = invoiceData.get(3);
+     DireccionReceptor = invoiceData.get(4);
+     ImporteTotal = invoiceData.get(5);
+     ImpTotalIVA = invoiceData.get(6);
+     TotalBaseImp = invoiceData.get(7);
+     BaseImponible21 = invoiceData.get(8);
+     Importe21 = invoiceData.get(9);
+     BaseImponible10 = invoiceData.get(10);
+     Importe10 = invoiceData.get(11);
+     BaseImponible4 = invoiceData.get(12);
+     Importe4 = invoiceData.get(13);
+     BaseImponible0 = invoiceData.get(14);
+     Importe0 = invoiceData.get(15);
+     FechaVencimiento = invoiceData.get(16);
+     Metodo_de_pago = invoiceData.get(17);
+     CodigoPostal = invoiceData.get(18);
+     Ciudad = invoiceData.get(19);
+     Provincia = invoiceData.get(20);
+     Telefono = invoiceData.get(21);
+     
+     System.out.println();
+     System.out.println();
+      
+     /*for(String elemento : invoiceData) { System.out.println(elemento); }*/
+    }
+	
+	public  static String getMessage() {
+		return mensaje;
+	}
+	
+	public static Boolean getStatus() {
+		return isOk;
+	}
+	
+	public static String getNombreFicheroSalida() {
+		return nombreFicheroSalida;
+	}
+	
+	public static String getNumFactura() {
+		return NumFactura;
+	}
+
+	
+	public static void writePDF(String rutasalidapdf, String nombreFichero, String  postfijo) throws IOException {
+
+        //String ficherosalida = "C:\\opt\\VISMA\\PruebaPDF_"+postfijo+".pdf";
+        
+        String ficherosalida = rutasalidapdf+nombreFichero+"_"+NumFactura+"_"+postfijo+".pdf";
+        nombreFicheroSalida = nombreFichero+"_"+NumFactura+"_"+postfijo+".pdf";
+        
+        System.out.println(ficherosalida);
+        
+		try {
+	    PdfDocument pdfDoc = new PdfDocument(new PdfWriter(ficherosalida));
+	    Document document = new Document(pdfDoc);
+	    //pdfDoc.setDefaultPageSize(PageSize.A4);
+	    
+	    document.setLeftMargin(77f);
+	    document.setTopMargin(67f);
+	    document.setRightMargin(70F);
+	    document.setBottomMargin(67f);
+	    //document.setMargins(67f,75f,67f,77f);
+	    //document.setMargins(topMargin, rightMargin, bottomMargin, leftMargin);
+	    
+	    List<String> dirItems = Arrays.asList(DireccionReceptor.split(" "));
+	    String calle = dirItems.get(0) + " " + dirItems.get(1) + " " + dirItems.get(2);
+	    String ciudad = dirItems.get(dirItems.size()-1);
+	    String dirCPMun = DireccionReceptor.replace(calle, "").replace(ciudad, "").trim();
+	  
+	    
+	    Text textoFactura = new Text("FACTURA").setFontSize(31f).setBold();
+	    Text lineBreak = new Text("\n");
+	    Text textoNombreReceptor = new Text(NombreReceptor).setFontSize(12f);
+	    Text textoCalle =  new Text(calle).setFontSize(12f);
+	    Text textoCPMunicipio = new Text(dirCPMun).setFontSize(12f);
+	    Text textoCiudad = new Text(ciudad).setFontSize(12f);
+
+	    
+	    Cell cellNIFAb = new Cell().add(new Paragraph("NIF: " )).setBold();
+	    cellNIFAb.setBorder(Border.NO_BORDER);
+	    Cell cellNIF = new Cell().add(new Paragraph(NIF_Receptor));
+	    cellNIF.setBorder(Border.NO_BORDER);
+	    
+	    Table tableNIF = new Table(2);
+	    tableNIF.addCell(cellNIFAb);	    
+	    tableNIF.addCell(cellNIF);
+	    
+	    Table tableEmisor = new Table(1);
+	    //tableEmisor.setWidth(UnitValue.createPercentValue(100));
+	    tableEmisor.setHorizontalAlignment(HorizontalAlignment.RIGHT);
+	    	    
+
+	    float facturaIndent = 30f; //10f equivale a d 5 espacios, 2f = 1 espacios
+	    float cellspacing = 0.8f;
+
+	    Cell cellNombreEmisor = new Cell().add(new Paragraph(nombEmisor).setFontSize(10f).setMultipliedLeading(cellspacing));
+	    cellNombreEmisor.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    Cell cellcalleEmisor = new Cell().add(new Paragraph(calleEmisor).setFontSize(10f).setMultipliedLeading(cellspacing));
+	    cellcalleEmisor.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    Cell celldircEmisor = new Cell().add(new Paragraph(direccionEmisor).setFontSize(10f).setMultipliedLeading(cellspacing));
+	    celldircEmisor.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    Cell cellnifEmisor = new Cell().add(new Paragraph(nifEmisor).setFontSize(10f).setMultipliedLeading(cellspacing));
+	    cellnifEmisor.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+
+	    tableEmisor.addCell(cellNombreEmisor);
+	    tableEmisor.addCell(cellcalleEmisor);
+	    tableEmisor.addCell(celldircEmisor);
+	    tableEmisor.addCell(cellnifEmisor);
+	    
+	    Table tableFactura = new Table(2);
+	    
+	    
+	    Cell cellNumFacturaTitle = new Cell().add(new Paragraph("Número de factura:").setBold().setFontSize(12f).setMultipliedLeading(cellspacing));
+	    cellNumFacturaTitle.setBorder(Border.NO_BORDER);
+	    Cell cellFechaTitle = new Cell().add(new Paragraph("Fecha:").setBold().setFontSize(12f).setMultipliedLeading(cellspacing));
+	    cellFechaTitle.setBorder(Border.NO_BORDER);
+	    Cell cellFechaVencimientoTitle = new Cell().add(new Paragraph("Vencimiento:").setBold().setFontSize(12f).setMultipliedLeading(cellspacing));
+	    cellFechaVencimientoTitle.setBorder(Border.NO_BORDER);
+	    Cell cellNumeroFactura = new Cell().add(new Paragraph(NumFactura).setFontSize(10f).setFirstLineIndent(facturaIndent).setMultipliedLeading(cellspacing));
+	    cellNumeroFactura.setBorder(Border.NO_BORDER);
+	    Cell cellFechaFactura = new Cell().add(new Paragraph(FechaFactura).setFontSize(10f).setFirstLineIndent(facturaIndent).setMultipliedLeading(cellspacing));
+	    cellFechaFactura.setBorder(Border.NO_BORDER);
+	    Cell cellFechaVencimiento = new Cell().add(new Paragraph(FechaVencimiento).setFontSize(10f).setFirstLineIndent(facturaIndent).setMultipliedLeading(cellspacing));
+	    cellFechaVencimiento.setBorder(Border.NO_BORDER);
+	    
+	    tableFactura.addCell(cellNumFacturaTitle);
+	    tableFactura.addCell(cellNumeroFactura);
+	    tableFactura.addCell(cellFechaTitle);
+	    tableFactura.addCell(cellFechaFactura);
+	    tableFactura.addCell(cellFechaVencimientoTitle);
+	    tableFactura.addCell(cellFechaVencimiento);
+	    
+	    Table tableDetallesImp = new Table(3);
+	    tableDetallesImp.setWidth(UnitValue.createPercentValue(100));
+	    
+	    Cell cellDetallesIVAtitle = new Cell().add(new Paragraph("Detalles IVA").setFontSize(13f).setMultipliedLeading(cellspacing));
+	    cellDetallesIVAtitle.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+	    Cell cellBaseImponibleTitle = new Cell().add(new Paragraph("Base imponible").setFontSize(13f).setMultipliedLeading(cellspacing));
+	    cellBaseImponibleTitle.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+	    Cell cellImporteIvaTitle = new Cell().add(new Paragraph("Importe de IVA").setFontSize(13f).setMultipliedLeading(cellspacing));
+	    cellImporteIvaTitle.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    
+	    Cell cellDetalleIVA21 = new Cell().add(new Paragraph("21 %").setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellDetalleIVA21.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+		Cell cellBaseImp21 = new Cell().add(new Paragraph(BaseImponible21).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellBaseImp21.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+		Cell cellImporte21 = new Cell().add(new Paragraph(Importe21).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellImporte21.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	   	    
+	    Cell cellDetalleIVA10 = new Cell().add(new Paragraph("10 %").setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellDetalleIVA10.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+		Cell cellBaseImp10 = new Cell().add(new Paragraph(BaseImponible10).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellBaseImp10.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+		Cell cellImporte10 = new Cell().add(new Paragraph(Importe10).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellImporte10.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+		
+	    Cell cellDetalleIVA4 = new Cell().add(new Paragraph("4 %").setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellDetalleIVA4.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+		Cell cellBaseImp4 = new Cell().add(new Paragraph(BaseImponible4).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellBaseImp4.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+		Cell cellImporte4 = new Cell().add(new Paragraph(Importe4).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellImporte4.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);		
+		
+	    Cell cellDetalleIVA0 = new Cell().add(new Paragraph("0 %").setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellDetalleIVA0.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+		Cell cellBaseImp0 = new Cell().add(new Paragraph(BaseImponible0).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellBaseImp0.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+		Cell cellImporte0 = new Cell().add(new Paragraph(Importe0).setFontSize(12f).setMultipliedLeading(cellspacing));
+		cellImporte0.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);	
+		
+	    Cell cellIvaExentoTitle = new Cell().add(new Paragraph("Iva Exento").setFontSize(12f).setMultipliedLeading(cellspacing));
+	    cellIvaExentoTitle.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.LEFT);
+	    Cell cellBaseImponible0Title = new Cell().add(new Paragraph("(Base imponible 0 %)").setFontSize(12f).setMultipliedLeading(cellspacing));
+	    cellBaseImponible0Title.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+	    Cell cellImporte0Title = new Cell().add(new Paragraph("(Importe 0%)").setFontSize(12f).setMultipliedLeading(cellspacing));
+	    cellImporte0Title.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    	    
+	    tableDetallesImp.addCell(cellDetallesIVAtitle);
+	    tableDetallesImp.addCell(cellBaseImponibleTitle);
+	    tableDetallesImp.addCell(cellImporteIvaTitle);
+	    
+	    /*BaseImponible21 
+	     Importe21 
+	     BaseImponible10
+	     Importe10 
+	     BaseImponible4 
+	     Importe4 
+	     BaseImponible0 
+	     Importe0 */
+	    
+
+	    if (!BaseImponible21.equals("0") || !Importe21.equals("0") ) {
+		    tableDetallesImp.addCell(cellDetalleIVA21);
+		    tableDetallesImp.addCell(cellBaseImp21);
+		    tableDetallesImp.addCell(cellImporte21);
+	    }
+	    
+	    if (!BaseImponible10.equals("0") || !Importe10.equals("0") ) {
+		    tableDetallesImp.addCell(cellDetalleIVA10);
+		    tableDetallesImp.addCell(cellBaseImp10);
+		    tableDetallesImp.addCell(cellImporte10);	    	
+	    }
+	    
+	    if (!BaseImponible4.equals("0") || !Importe4.equals("0") ) {
+		    tableDetallesImp.addCell(cellDetalleIVA4);
+		    tableDetallesImp.addCell(cellBaseImp4);
+		    tableDetallesImp.addCell(cellImporte4);	    	
+	    }
+	    
+	    if (!BaseImponible0.equals("0") || !Importe0.equals("0") ) {
+		    tableDetallesImp.addCell(cellDetalleIVA0);
+		    tableDetallesImp.addCell(cellBaseImp0);
+		    tableDetallesImp.addCell(cellImporte0);	 	    
+		    
+		    tableDetallesImp.addCell(cellIvaExentoTitle);
+		    tableDetallesImp.addCell(cellBaseImponible0Title);
+		    tableDetallesImp.addCell(cellImporte0Title);
+	    }
+	    	    
+
+	   
+	    Table tableTotales = new Table(2);
+	    tableTotales.setWidth(UnitValue.createPercentValue(100));
+	    
+	    Cell cellBaseImptotalTitle = new Cell().add(new Paragraph("Base Imponible:").setFontSize(12f).setBold().setMultipliedLeading(cellspacing*2));
+	    cellBaseImptotalTitle.setBorder(Border.NO_BORDER);
+	    Cell cellBaseImptotal = new Cell().add(new Paragraph(TotalBaseImp).setFontSize(12f).setMultipliedLeading(cellspacing*2));
+	    cellBaseImptotal.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    Cell cellTotalIVAtitle = new Cell().add(new Paragraph("Total IVA").setFontSize(12f).setBold().setMultipliedLeading(cellspacing*2));
+	    cellTotalIVAtitle.setBorder(Border.NO_BORDER);
+	    Cell cellTotalIVA = new Cell().add(new Paragraph(ImpTotalIVA).setFontSize(12f).setMultipliedLeading(cellspacing*2));
+	    cellTotalIVA.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+	    Cell cellTotalApagarTitle = new Cell().add(new Paragraph("Total a Pagar").setFontSize(16f).setBold().setMultipliedLeading(cellspacing*2));
+	    cellTotalApagarTitle.setBorder(Border.NO_BORDER);
+	    Cell cellTotalApagar = new Cell().add(new Paragraph(ImporteTotal).setFontSize(16f).setBold().setMultipliedLeading(cellspacing*2));
+	    cellTotalApagar.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.RIGHT);
+
+	    tableTotales.addCell(cellBaseImptotalTitle);
+	    tableTotales.addCell(cellBaseImptotal);
+	    tableTotales.addCell(cellTotalIVAtitle);
+	    tableTotales.addCell(cellTotalIVA);
+	    tableTotales.addCell(cellTotalApagarTitle);
+	    tableTotales.addCell(cellTotalApagar);
+	    
+	    tableTotales.setFixedPosition(67f,167f,461f);
+	    
+	 
+	    
+	    Table tableEmisorBottom = new Table(1);
+	    
+	    Cell cellDatosEmisor = new Cell().add(new Paragraph(EmisorDatosCompletos).setFontSize(10f).setMultipliedLeading(cellspacing));
+	    cellDatosEmisor.setBorder(Border.NO_BORDER);
+	    Cell cellTextoFinal = new Cell().add(new Paragraph("Documento generado para procesamiento interno de datos.").setFontSize(11f).setMultipliedLeading(cellspacing));
+	    cellTextoFinal.setBorder(Border.NO_BORDER).setTextAlignment(TextAlignment.CENTER);
+	    
+	   /*System.out.println("Bottom: "+tableTotales.getMarginBottom());
+	   System.out.println("Top: "+tableTotales.getMarginTop());
+	    */
+	    tableEmisorBottom.addCell(cellDatosEmisor);
+	    tableEmisorBottom.addCell(cellTextoFinal);
+	    
+	    //System.out.println("Document Height: " + pdfDoc.getDefaultPageSize().getHeight());
+	    //System.out.println("Document Weight: " + pdfDoc.getDefaultPageSize().getWidth());
+	 
+	    
+	    tableEmisorBottom.setFixedPosition(67f,77f,461f);
+	    //tableEmisorBottom.setFixedPosition(left, bottom, width);
+	    
+	    Paragraph paragFactura = new Paragraph(textoFactura);
+	    Paragraph paraglineBreak = new Paragraph(lineBreak);
+	    Paragraph paragNombreReceptor = new Paragraph(textoNombreReceptor);
+	    Paragraph paragCalle = new Paragraph(textoCalle);
+	    Paragraph paragdirCPMun = new Paragraph(textoCPMunicipio);
+	    Paragraph paragciudad = new Paragraph(textoCiudad);	    
+    
+	    document.add(paragFactura);
+	    document.add(tableEmisor);
+	    document.add(paraglineBreak);
+	    document.add(paraglineBreak);
+	    document.add(paragNombreReceptor.setMultipliedLeading(0f));
+	    document.add(tableNIF);
+	    document.add(paragCalle.setMultipliedLeading(0f));
+	    document.add(paragdirCPMun);
+	    document.add(paragciudad.setMultipliedLeading(0f));
+	    document.add(paraglineBreak);
+	    document.add(tableFactura);
+	    document.add(paraglineBreak);
+	    document.add(paraglineBreak);
+	    document.add(tableDetallesImp);
+	    document.add(paraglineBreak);
+	    document.add(paraglineBreak);
+	    document.add(paraglineBreak);
+	    document.add(paraglineBreak);
+	    document.add(tableTotales);
+	    document.add(tableEmisorBottom);
+	    document.close();
+	    
+	    System.out.println("PDF creado exitosamente");
+	    
+	    mensaje = "PDF creado exitosamente";
+		} catch (Exception ex) {
+			System.out.println(ex.getMessage());
+			isOk = false;
+			mensaje = ex.getMessage();
+		}
+		
+	}
+	
+
+
+
+}

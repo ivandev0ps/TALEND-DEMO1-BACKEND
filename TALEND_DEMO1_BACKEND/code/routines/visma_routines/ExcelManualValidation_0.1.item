@@ -1,0 +1,78 @@
+package routines;
+import java.util.List;
+import java.util.Locale;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+
+public class ExcelManualValidation {
+		
+	private static String mensaje = "";
+	private static String mensajeError = "";
+
+    public static Boolean myMethod(String Excelcolumns) {
+    	boolean isExcelOk = true;
+    	
+    	List<String> excelItems = Arrays.asList(Excelcolumns.split(";"));
+    	
+    	String excelPlantillaColumnas = "NumerodeFactura,FechaFactura,NombreReceptor,NIFReceptor,DirecciónReceptor,ImporteTotal,ImporteTotalIVA,TOTALBASESIMPONIBLES,BaseImponible21%,Importe21%,BaseImponible10%,Importe10%,BaseImponible4%,Importe4%,BaseImponible0%,Importe0%,FechaVencimiento,Metododepago,Códigopostal,Ciudad,Provincia,Teléfono";
+    	List<String> excelItemsPlantilla = Arrays.asList(excelPlantillaColumnas.split(","));
+    	
+    	List<String> columnNamesAux = new ArrayList<>();
+
+    	excelItems.forEach(item -> columnNamesAux.add(item.replaceAll("\\s+","").trim()));
+    	columnNamesAux.removeAll(Arrays.asList(""));
+  
+    	if (excelItemsPlantilla.size() != columnNamesAux.size()) {
+        	isExcelOk = false;
+        	mensajeError = "El número de columnas no es el correcto, intenta otro fichero";
+        	//System.out.println(mensajeError);
+    	}  else {
+            if(!excelItemsPlantilla.equals(columnNamesAux)) {
+            	isExcelOk = false;
+            	mensajeError = "Los nombres de columnas no coinciden, intenta otro fichero";
+            	//System.out.println(mensajeError);
+            	
+            } else {
+            	mensaje = "La validación del fichero excel es satisfactoria, ir a generar facturas";
+            }
+            
+    	}
+      	 	
+    	return isExcelOk ;
+    }
+    
+    
+    public static String getMessageExcelvalidation() {
+    	return mensaje;
+    }
+    
+    public static String getMessageExcelvalidationError() {
+    	return mensajeError;
+    }
+    
+    public static String removeDuplicates(String listValues) {
+    	
+    	HashSet<String> uniques =new HashSet<String>(Arrays.asList(listValues.split(",")));
+    	
+    	return uniques.toString().replace("[","").replace("]","") ;
+    }
+    
+    public static boolean validateDate(String fecha) {
+    	boolean isDateOk = true;
+    	    	
+    	try {
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE MMM d H:mm:ss zzz yyyy", Locale.ENGLISH);
+            ZonedDateTime parsedDate = ZonedDateTime.parse(fecha, formatter);
+            //System.out.println(parsedDate.format(DateTimeFormatter.ISO_LOCAL_DATE));	
+    	} catch (Exception e) {
+    		isDateOk = false;
+    	}
+    		
+    	
+		return isDateOk;
+    }
+}

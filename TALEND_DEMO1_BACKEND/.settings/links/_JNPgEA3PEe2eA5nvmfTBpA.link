@@ -1,0 +1,23 @@
+{
+  "itemId" : "_JNPgEA3PEe2eA5nvmfTBpA",
+  "contextList" : [ {
+    "contextName" : "Default",
+    "repoId" : "_ER2j0AzBEe241K9pK5Y6vg",
+    "parameterList" : [ {
+      "id" : "_KklGIgzBEe241K9pK5Y6vg",
+      "name" : "email_from"
+    }, {
+      "id" : "_KklGIwzBEe241K9pK5Y6vg",
+      "name" : "email_to"
+    }, {
+      "id" : "_UP9RgCPGEe2WpI1g4GTMPw",
+      "name" : "smtp_password"
+    }, {
+      "id" : "_KklGIQzBEe241K9pK5Y6vg",
+      "name" : "smtp_port"
+    }, {
+      "id" : "_KklGIAzBEe241K9pK5Y6vg",
+      "name" : "smtp_server"
+    } ]
+  } ]
+}

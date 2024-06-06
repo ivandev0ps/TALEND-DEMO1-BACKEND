@@ -1,5 +1,233 @@
 [ {
   "baseItem" : {
+    "id" : "_3QKhYA3MEe2eA5nvmfTBpA",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "VISMA:_KmYX0A6AEe25KowW0XPV_g",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "VISMA:_Y0rZ4A3NEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_ALYrYChlEe28Jbprg0cQzQ",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_sG2HwA3FEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "VISMA:_GiysAA3PEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "VISMA:_JNPgEA3PEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "VISMA:_yWl6oA3dEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - facturas",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_log_ficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - visma_facturas",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_iPt6gAQVEe28MIrgV7DS9w - metadata",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_GiysAA3PEe2eA5nvmfTBpA",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "myGeneralRoutines",
+    "version" : "Latest",
+    "type" : "routine"
+  }, {
+    "id" : "writePDFroutines",
+    "version" : "Latest",
+    "type" : "routine"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_log_ficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - visma_facturas",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_JNPgEA3PEe2eA5nvmfTBpA",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_ER2j0AzBEe241K9pK5Y6vg",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conexiones",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_log_ficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_KmYX0A6AEe25KowW0XPV_g",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "VISMA:_P5ZJwA6lEe2jpcEarNdWPg",
+    "version" : "Latest",
+    "type" : "job"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_log_ficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_P5ZJwA6lEe2jpcEarNdWPg",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "built-in",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "ExcelManualValidation",
+    "version" : "Latest",
+    "type" : "routine"
+  }, {
+    "id" : "_-5EvQA6XEe2jpcEarNdWPg - metadata",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_iPt6gAQVEe28MIrgV7DS9w - metadata",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_Xd90sA3EEe2eA5nvmfTBpA",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conexiones",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_Y0rZ4A3NEe2eA5nvmfTBpA",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_log_ficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
     "id" : "_fR82EDNuEe2WQbeNjylQKg",
     "version" : "0.1",
     "type" : "job"
@@ -22,6 +250,33 @@
     "type" : "property"
   }, {
     "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conexiones",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+}, {
+  "baseItem" : {
+    "id" : "_yWl6oA3dEe2eA5nvmfTBpA",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_sG2HwA3FEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "myGeneralRoutines",
+    "version" : "Latest",
+    "type" : "routine"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conficheros",
+    "version" : "Latest",
+    "type" : "schema"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_log_ficheros",
     "version" : "Latest",
     "type" : "schema"
   } ]

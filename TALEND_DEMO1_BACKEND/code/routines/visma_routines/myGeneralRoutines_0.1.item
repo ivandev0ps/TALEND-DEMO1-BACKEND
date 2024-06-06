@@ -1,0 +1,53 @@
+package routines;
+
+
+import java.util.Locale;
+import java.text.NumberFormat;
+import java.text.*;
+
+public class myGeneralRoutines {
+
+    public static String getThousandFormat(Double numero) {
+    	   	
+    	String auxnum = "";
+    	
+    	if(numero % 1 != 0){ //Para numeros con decimal
+	  		Locale locale = Locale.GERMANY;
+			NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+			String nuevonum = numberFormat.format(numero);  
+			auxnum = nuevonum;
+    	}
+    		
+   		else{//Para nnumeros enteros
+   			String intnumero = numero.toString().replace(".0","");
+   			int nuevoint = Integer.parseInt(intnumero);
+	    	DecimalFormat formatter = (DecimalFormat) NumberFormat.getInstance(Locale.FRENCH);
+	    	DecimalFormatSymbols symbols = formatter.getDecimalFormatSymbols();
+	    	symbols.setGroupingSeparator(',');
+	    	formatter.setDecimalFormatSymbols(symbols);
+	    	auxnum = formatter.format(nuevoint);
+   		}
+  
+		return auxnum.replace(" €","");
+    
+    }
+    
+    public static String getThousandFormatTrailingZeros(Double numero) {
+	   	
+    	String auxnum = "";
+   	
+  		Locale locale = Locale.GERMANY;
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+		String nuevonum = numberFormat.format(numero);  
+		auxnum = nuevonum;	
+  
+		return auxnum.replace(" €","");
+    
+    }
+    
+    public static String trailingZeros(Double numero) {
+    	DecimalFormat df = new DecimalFormat("#.00");
+    	return df.format(numero);
+    }
+    
+}	
