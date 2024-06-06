@@ -1,1 +1,28 @@
-[ ]
+[ {
+  "baseItem" : {
+    "id" : "_fR82EDNuEe2WQbeNjylQKg",
+    "version" : "0.1",
+    "type" : "job"
+  },
+  "relatedItems" : [ {
+    "id" : "_ER2j0AzBEe241K9pK5Y6vg",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_sG2HwA3FEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_yN7-8DNuEe2WQbeNjylQKg",
+    "version" : "Latest",
+    "type" : "context"
+  }, {
+    "id" : "_e9SQgA3FEe2eA5nvmfTBpA",
+    "version" : "Latest",
+    "type" : "property"
+  }, {
+    "id" : "_aDsKsAZ6Ee2MpYBFZnP3yw - talend_conexiones",
+    "version" : "Latest",
+    "type" : "schema"
+  } ]
+} ]
