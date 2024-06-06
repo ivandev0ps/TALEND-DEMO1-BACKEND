@@ -1,0 +1,26 @@
+{
+  "itemId" : "_kVos4AQPEe28MIrgV7DS9w",
+  "contextList" : [ {
+    "contextName" : "Default",
+    "repoId" : "_sG2HwA3FEe2eA5nvmfTBpA",
+    "parameterList" : [ {
+      "id" : "_sHUo4Q3FEe2eA5nvmfTBpA",
+      "name" : "MariaDBConnection_Port"
+    }, {
+      "id" : "_sHUo4g3FEe2eA5nvmfTBpA",
+      "name" : "MariaDBConnection_AdditionalParams"
+    }, {
+      "id" : "_sHVP8A3FEe2eA5nvmfTBpA",
+      "name" : "MariaDBConnection_Server"
+    }, {
+      "id" : "_sHVP8Q3FEe2eA5nvmfTBpA",
+      "name" : "MariaDBConnection_Password"
+    }, {
+      "id" : "_sHVP8g3FEe2eA5nvmfTBpA",
+      "name" : "MariaDBConnection_Login"
+    }, {
+      "id" : "_sHVP8w3FEe2eA5nvmfTBpA",
+      "name" : "MariaDBConnection_Database"
+    } ]
+  } ]
+}
